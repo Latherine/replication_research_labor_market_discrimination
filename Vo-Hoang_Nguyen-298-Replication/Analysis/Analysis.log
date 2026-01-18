@@ -1,0 +1,763 @@
+-------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\PhotonUser\My Files\OneDrive\Files\Vo-Hoang-Nguyen-298-Replication\Analysis/Analysis.log
+  log type:  text
+ opened on:  10 Dec 2025, 20:18:50
+
+. 
+. *Load the Names dataset
+. use "./Data/Names.dta"
+
+. 
+. * Detailed description of contents of variables in the dataset
+. codebook, compact
+
+Variable       Obs Unique      Mean  Min  Max  Label
+-------------------------------------------------------------------------------------------------------------------------------------------
+ofjobs        4870      7  3.661396    1    7  number of jobs listed on resume
+yearsexp      4870     26  7.842916    1   44  number of years of work experience on the resume
+honors        4870      2  .0527721    0    1  1=resume mentions some honors
+volunteer     4870      2   .411499    0    1  1=resume mentions some volunteering experience
+military      4870      2  .0971253    0    1  1=applicant has some military experience
+empholes      4870      2  .4480493    0    1  1=resume has some employment holes
+workinschool  4870      2  .5595483    0    1  1=resume mentions some work experience while at school
+email         4870      2  .4792608    0    1  1=email address on applicant's resume
+computersk~s  4870      2  .8205339    0    1  1=resume mentions some computer skills
+specialski~s  4870      2  .3287474    0    1  1=resume mentions some special skills
+firstname     4870     36         .    .    .  applicant's first name
+expminreq     2124     12         .    .    .  min experience required, if any
+eoe           4870      2  .2911704    0    1  1=ad mentions employer is EOE
+manager       4870      2  .1521561    0    1  manager wanted
+supervisor    4870      2  .0772074    0    1  supervisor wanted
+secretary     4870      2  .3328542    0    1  secretary wanted
+offsupport    4870      2  .1186858    0    1  
+salesrep      4870      2  .1511294    0    1  sales representative wanted
+retailsales   4870      2  .1679671    0    1  retail sales worker wanted
+req           4870      2   .787269    0    1  1=ad mentions any requirement for job
+expreq        4870      2  .4353183    0    1  1=ad mentions some experience requirement
+comreq        4870      2   .124846    0    1  1=ad mentions some communication skills requirement
+educreq       4870      2  .1067762    0    1  1=ad mentions some educational requirement
+compreq       4870      2  .4371663    0    1  1=ad mentions some computer skill requirement
+orgreq        4870      2  .0726899    0    1  1=ad mentions some organizational skills requirement
+manuf         4870      2  .0829569    0    1  employer industry is manufacturing
+transcom      4870      2  .0303901    0    1  employer industry is transport/communication
+bankreal      4870      2  .0850103    0    1  employer industry is finance, insurance, real estate
+trade         4870      2   .213963    0    1  employer industry is wholesale or retail trade
+busservice    4870      2  .2677618    0    1  employer industry is business and personal  services
+othservice    4870      2  .1548255    0    1  employer industry is health, educ. and social  services
+missind       4870      2  .1650924    0    1  employer industry is other/unknown
+black         4870      2        .5    0    1  
+chicago       4870      2  .5552361    0    1  
+high          4870      2  .5022587    0    1  
+female        4870      2  .7691992    0    1  
+college       4870      2  .7195072    0    1  
+call_back     4870      2  .0804928    0    1  
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+. 
+. * Install needed packages
+. ssc install outreg2
+checking outreg2 consistency and verifying not already installed...
+all files already exist and are up to date.
+
+. ssc install aaplot
+checking aaplot consistency and verifying not already installed...
+all files already exist and are up to date.
+
+. 
+. *** Replication
+. **TABLE 1 - MEAN CALLBACK RATES BY RACIAL SOUNDINGNESS OF NAMES
+. *All sent resumes
+. mean call_back if black == 0
+
+Mean estimation                          Number of obs = 2,435
+
+--------------------------------------------------------------
+             |       Mean   Std. err.     [95% conf. interval]
+-------------+------------------------------------------------
+   call_back |   .0965092   .0059853      .0847724    .1082461
+--------------------------------------------------------------
+
+. outreg2 using "./Analysis/table1.xls", append
+./Analysis/table1.xls
+dir : seeout
+
+. 
+. mean call_back if black == 1
+
+Mean estimation                          Number of obs = 2,435
+
+--------------------------------------------------------------
+             |       Mean   Std. err.     [95% conf. interval]
+-------------+------------------------------------------------
+   call_back |   .0644764   .0049781      .0547145    .0742382
+--------------------------------------------------------------
+
+. outreg2 using "./Analysis/table1.xls", append
+./Analysis/table1.xls
+dir : seeout
+
+. 
+. *Chicago
+. mean call_back if chicago == 1 & black == 0
+
+Mean estimation                          Number of obs = 1,352
+
+--------------------------------------------------------------
+             |       Mean   Std. err.     [95% conf. interval]
+-------------+------------------------------------------------
+   call_back |   .0806213    .007407      .0660908    .0951518
+--------------------------------------------------------------
+
+. outreg2 using "./Analysis/table1.xls", append
+./Analysis/table1.xls
+dir : seeout
+
+. 
+. mean call_back if chicago == 1 & black == 1
+
+Mean estimation                          Number of obs = 1,352
+
+--------------------------------------------------------------
+             |       Mean   Std. err.     [95% conf. interval]
+-------------+------------------------------------------------
+   call_back |   .0539941   .0061488      .0419318    .0660564
+--------------------------------------------------------------
+
+. outreg2 using "./Analysis/table1.xls", append
+./Analysis/table1.xls
+dir : seeout
+
+. 
+. *Boston
+. mean call_back if chicago == 0 & black == 0
+
+Mean estimation                          Number of obs = 1,083
+
+--------------------------------------------------------------
+             |       Mean   Std. err.     [95% conf. interval]
+-------------+------------------------------------------------
+   call_back |   .1163435   .0097476      .0972171    .1354699
+--------------------------------------------------------------
+
+. outreg2 using "./Analysis/table1.xls", append
+./Analysis/table1.xls
+dir : seeout
+
+. 
+. mean call_back if chicago == 0 & black == 1
+
+Mean estimation                          Number of obs = 1,083
+
+--------------------------------------------------------------
+             |       Mean   Std. err.     [95% conf. interval]
+-------------+------------------------------------------------
+   call_back |   .0775623   .0081317      .0616067     .093518
+--------------------------------------------------------------
+
+. outreg2 using "./Analysis/table1.xls", append
+./Analysis/table1.xls
+dir : seeout
+
+. 
+. *Females
+. mean call_back if female == 1 & black == 0
+
+Mean estimation                          Number of obs = 1,860
+
+--------------------------------------------------------------
+             |       Mean   Std. err.     [95% conf. interval]
+-------------+------------------------------------------------
+   call_back |   .0989247   .0069246       .085344    .1125055
+--------------------------------------------------------------
+
+. outreg2 using "./Analysis/table1.xls", append
+./Analysis/table1.xls
+dir : seeout
+
+. 
+. mean call_back if female == 1 & black == 1
+
+Mean estimation                          Number of obs = 1,886
+
+--------------------------------------------------------------
+             |       Mean   Std. err.     [95% conf. interval]
+-------------+------------------------------------------------
+   call_back |   .0662778   .0057298      .0550405    .0775152
+--------------------------------------------------------------
+
+. outreg2 using "./Analysis/table1.xls", append
+./Analysis/table1.xls
+dir : seeout
+
+. 
+. *Males
+. mean call_back if female ==0 & black == 0
+
+Mean estimation                            Number of obs = 575
+
+--------------------------------------------------------------
+             |       Mean   Std. err.     [95% conf. interval]
+-------------+------------------------------------------------
+   call_back |   .0886957   .0118666      .0653884    .1120029
+--------------------------------------------------------------
+
+. outreg2 using "./Analysis/table1.xls", append
+./Analysis/table1.xls
+dir : seeout
+
+. 
+. mean call_back if female ==0 &  black == 1
+
+Mean estimation                            Number of obs = 549
+
+--------------------------------------------------------------
+             |       Mean   Std. err.     [95% conf. interval]
+-------------+------------------------------------------------
+   call_back |   .0582878   .0100082      .0386286     .077947
+--------------------------------------------------------------
+
+. outreg2 using "./Analysis/table1.xls", append
+./Analysis/table1.xls
+dir : seeout
+
+. 
+. 
+. **TABLE 2 - RESUME CHARACTERISTICS - SUMMARY STATISTICS 
+. 
+. * Mean & standard deviation for the resume characteristics to all resumes
+. summarize college yearsexp volunteer military email empholes workinschool honors computerskills specialskills
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+     college |      4,870    .7195072    .4492861          0          1
+    yearsexp |      4,870    7.842916    5.044612          1         44
+   volunteer |      4,870     .411499    .4921558          0          1
+    military |      4,870    .0971253    .2961587          0          1
+       email |      4,870    .4792608     .499621          0          1
+-------------+---------------------------------------------------------
+    empholes |      4,870    .4480493    .4973449          0          1
+workinschool |      4,870    .5595483    .4964923          0          1
+      honors |      4,870    .0527721    .2236011          0          1
+computersk~s |      4,870    .8205339    .3837815          0          1
+specialski~s |      4,870    .3287474    .4698062          0          1
+
+. outreg2 using  "./Analysis/table2.xls", sum(log) eqdrop(N max min) replace see
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+      ofjobs |      4,870    3.661396    1.219126          1          7
+    yearsexp |      4,870    7.842916    5.044612          1         44
+      honors |      4,870    .0527721    .2236011          0          1
+   volunteer |      4,870     .411499    .4921558          0          1
+    military |      4,870    .0971253    .2961587          0          1
+-------------+---------------------------------------------------------
+    empholes |      4,870    .4480493    .4973449          0          1
+workinschool |      4,870    .5595483    .4964923          0          1
+       email |      4,870    .4792608     .499621          0          1
+computersk~s |      4,870    .8205339    .3837815          0          1
+specialski~s |      4,870    .3287474    .4698062          0          1
+-------------+---------------------------------------------------------
+         eoe |      4,870    .2911704    .4543485          0          1
+     manager |      4,870    .1521561     .359209          0          1
+  supervisor |      4,870    .0772074    .2669476          0          1
+   secretary |      4,870    .3328542    .4712832          0          1
+  offsupport |      4,870    .1186858    .3234517          0          1
+-------------+---------------------------------------------------------
+    salesrep |      4,870    .1511294    .3582117          0          1
+ retailsales |      4,870    .1679671    .3738755          0          1
+         req |      4,870     .787269     .409281          0          1
+      expreq |      4,870    .4353183    .4958495          0          1
+      comreq |      4,870     .124846    .3305781          0          1
+-------------+---------------------------------------------------------
+     educreq |      4,870    .1067762    .3088602          0          1
+     compreq |      4,870    .4371663    .4960872          0          1
+      orgreq |      4,870    .0726899    .2596535          0          1
+       manuf |      4,870    .0829569    .2758454          0          1
+    transcom |      4,870    .0303901     .171676          0          1
+-------------+---------------------------------------------------------
+    bankreal |      4,870    .0850103    .2789256          0          1
+       trade |      4,870     .213963    .4101431          0          1
+  busservice |      4,870    .2677618    .4428382          0          1
+  othservice |      4,870    .1548255    .3617754          0          1
+     missind |      4,870    .1650924     .371302          0          1
+-------------+---------------------------------------------------------
+       black |      4,870          .5    .5000513          0          1
+     chicago |      4,870    .5552361    .4969906          0          1
+        high |      4,870    .5022587    .5000462          0          1
+      female |      4,870    .7691992    .4213885          0          1
+     college |      4,870    .7195072    .4492861          0          1
+-------------+---------------------------------------------------------
+   call_back |      4,870    .0804928    .2720826          0          1
+
+Following variable is string, not included:  
+firstname  expminreq  
+Hit Enter to continue. 
+./Analysis/table2.xls
+dir : seeout
+
+. 
+. * Mean & standard deviation for the resume characteristics to resume with white name
+. summarize college yearsexp volunteer military email empholes workinschool honors computerskills specialskills if black == 0
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+     college |      2,435    .7162218    .4509231          0          1
+    yearsexp |      2,435    7.856263    5.079228          1         26
+   volunteer |      2,435    .4086242    .4916805          0          1
+    military |      2,435    .0924025    .2896527          0          1
+       email |      2,435    .4788501    .4996551          0          1
+-------------+---------------------------------------------------------
+    empholes |      2,435    .4501027    .4976062          0          1
+workinschool |      2,435    .5581109    .4967136          0          1
+      honors |      2,435    .0542094     .226477          0          1
+computersk~s |      2,435    .8086242    .3934649          0          1
+specialski~s |      2,435    .3301848    .4703761          0          1
+
+. outreg2 if black ==0 using  "./Analysis/table2.xls", sum(log) eqdrop(N max min) append see
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+      ofjobs |      2,435    3.664476    1.219345          1          7
+    yearsexp |      2,435    7.856263    5.079228          1         26
+      honors |      2,435    .0542094     .226477          0          1
+   volunteer |      2,435    .4086242    .4916805          0          1
+    military |      2,435    .0924025    .2896527          0          1
+-------------+---------------------------------------------------------
+    empholes |      2,435    .4501027    .4976062          0          1
+workinschool |      2,435    .5581109    .4967136          0          1
+       email |      2,435    .4788501    .4996551          0          1
+computersk~s |      2,435    .8086242    .3934649          0          1
+specialski~s |      2,435    .3301848    .4703761          0          1
+-------------+---------------------------------------------------------
+         eoe |      2,435    .2911704    .4543952          0          1
+     manager |      2,435    .1523614    .3594447          0          1
+  supervisor |      2,435    .0772074    .2669751          0          1
+   secretary |      2,435    .3326489    .4712587          0          1
+  offsupport |      2,435    .1186858    .3234849          0          1
+-------------+---------------------------------------------------------
+    salesrep |      2,435    .1511294    .3582485          0          1
+ retailsales |      2,435    .1679671    .3739139          0          1
+         req |      2,435     .787269     .409323          0          1
+      expreq |      2,435    .4353183    .4959005          0          1
+      comreq |      2,435     .124846    .3306121          0          1
+-------------+---------------------------------------------------------
+     educreq |      2,435    .1067762    .3088919          0          1
+     compreq |      2,435     .436961     .496112          0          1
+      orgreq |      2,435    .0726899    .2596802          0          1
+       manuf |      2,435    .0829569    .2758737          0          1
+    transcom |      2,435    .0303901    .1716936          0          1
+-------------+---------------------------------------------------------
+    bankreal |      2,435    .0850103    .2789543          0          1
+       trade |      2,435     .213963    .4101853          0          1
+  busservice |      2,435    .2677618    .4428837          0          1
+  othservice |      2,435    .1548255    .3618125          0          1
+     missind |      2,435    .1650924    .3713402          0          1
+-------------+---------------------------------------------------------
+       black |      2,435           0           0          0          0
+     chicago |      2,435    .5552361    .4970417          0          1
+        high |      2,435    .5022587    .5000976          0          1
+      female |      2,435    .7638604    .4247962          0          1
+     college |      2,435    .7162218    .4509231          0          1
+-------------+---------------------------------------------------------
+   call_back |      2,435    .0965092     .295349          0          1
+
+Following variable is string, not included:  
+firstname  expminreq  
+Hit Enter to continue. 
+./Analysis/table2.xls
+dir : seeout
+
+. 
+. * Mean & standard deviation for the resume characteristics to resume with African-American
+. summarize college yearsexp volunteer military email empholes workinschool honors computerskills specialskills if black == 1 
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+     college |      2,435    .7227926    .4477117          0          1
+    yearsexp |      2,435    7.829569    5.010764          1         44
+   volunteer |      2,435    .4143737    .4927148          0          1
+    military |      2,435     .101848    .3025105          0          1
+       email |      2,435    .4796715    .4996892          0          1
+-------------+---------------------------------------------------------
+    empholes |      2,435    .4459959    .4971771          0          1
+workinschool |      2,435    .5609856    .4963688          0          1
+      honors |      2,435    .0513347    .2207248          0          1
+computersk~s |      2,435    .8324435    .3735487          0          1
+specialski~s |      2,435    .3273101    .4693279          0          1
+
+. outreg2 if black ==1 using  "./Analysis/table2.xls", sum(log) eqdrop(N max min) append see
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+      ofjobs |      2,435    3.658316     1.21915          1          7
+    yearsexp |      2,435    7.829569    5.010764          1         44
+      honors |      2,435    .0513347    .2207248          0          1
+   volunteer |      2,435    .4143737    .4927148          0          1
+    military |      2,435     .101848    .3025105          0          1
+-------------+---------------------------------------------------------
+    empholes |      2,435    .4459959    .4971771          0          1
+workinschool |      2,435    .5609856    .4963688          0          1
+       email |      2,435    .4796715    .4996892          0          1
+computersk~s |      2,435    .8324435    .3735487          0          1
+specialski~s |      2,435    .3273101    .4693279          0          1
+-------------+---------------------------------------------------------
+         eoe |      2,435    .2911704    .4543952          0          1
+     manager |      2,435    .1519507    .3590468          0          1
+  supervisor |      2,435    .0772074    .2669751          0          1
+   secretary |      2,435    .3330595    .4714044          0          1
+  offsupport |      2,435    .1186858    .3234849          0          1
+-------------+---------------------------------------------------------
+    salesrep |      2,435    .1511294    .3582485          0          1
+ retailsales |      2,435    .1679671    .3739139          0          1
+         req |      2,435     .787269     .409323          0          1
+      expreq |      2,435    .4353183    .4959005          0          1
+      comreq |      2,435     .124846    .3306121          0          1
+-------------+---------------------------------------------------------
+     educreq |      2,435    .1067762    .3088919          0          1
+     compreq |      2,435    .4373717    .4961641          0          1
+      orgreq |      2,435    .0726899    .2596802          0          1
+       manuf |      2,435    .0829569    .2758737          0          1
+    transcom |      2,435    .0303901    .1716936          0          1
+-------------+---------------------------------------------------------
+    bankreal |      2,435    .0850103    .2789543          0          1
+       trade |      2,435     .213963    .4101853          0          1
+  busservice |      2,435    .2677618    .4428837          0          1
+  othservice |      2,435    .1548255    .3618125          0          1
+     missind |      2,435    .1650924    .3713402          0          1
+-------------+---------------------------------------------------------
+       black |      2,435           1           0          1          1
+     chicago |      2,435    .5552361    .4970417          0          1
+        high |      2,435    .5022587    .5000976          0          1
+      female |      2,435     .774538    .4179721          0          1
+     college |      2,435    .7227926    .4477117          0          1
+-------------+---------------------------------------------------------
+   call_back |      2,435    .0644764    .2456501          0          1
+
+Following variable is string, not included:  
+firstname  expminreq  
+Hit Enter to continue. 
+./Analysis/table2.xls
+dir : seeout
+
+. 
+. * Mean & standard deviation for the resume characteristics to resume with Higher quality
+. summarize college yearsexp volunteer military email empholes workinschool honors computerskills specialskills if high == 1
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+     college |      2,446    .7240392    .4470885          0          1
+    yearsexp |      2,446    8.294358    5.286246          1         44
+   volunteer |      2,446     .792314    .4057337          0          1
+    military |      2,446    .1901063    .3924651          0          1
+       email |      2,446    .9239575    .2651203          0          1
+-------------+---------------------------------------------------------
+    empholes |      2,446    .3397383    .4737172          0          1
+workinschool |      2,446    .7183156    .4499123          0          1
+      honors |      2,446    .0711365    .2571054          0          1
+computersk~s |      2,446    .9096484    .2867434          0          1
+specialski~s |      2,446    .3577269    .4794292          0          1
+
+. outreg2 if high ==1 using  "./Analysis/table2.xls", sum(log) eqdrop(N max min) append see
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+      ofjobs |      2,446    3.966476    1.281176          1          7
+    yearsexp |      2,446    8.294358    5.286246          1         44
+      honors |      2,446    .0711365    .2571054          0          1
+   volunteer |      2,446     .792314    .4057337          0          1
+    military |      2,446    .1901063    .3924651          0          1
+-------------+---------------------------------------------------------
+    empholes |      2,446    .3397383    .4737172          0          1
+workinschool |      2,446    .7183156    .4499123          0          1
+       email |      2,446    .9239575    .2651203          0          1
+computersk~s |      2,446    .9096484    .2867434          0          1
+specialski~s |      2,446    .3577269    .4794292          0          1
+-------------+---------------------------------------------------------
+         eoe |      2,446    .2968111     .456946          0          1
+     manager |      2,446    .1537204    .3607542          0          1
+  supervisor |      2,446    .0834015    .2765446          0          1
+   secretary |      2,446    .3319706    .4710168          0          1
+  offsupport |      2,446    .1185609    .3233372          0          1
+-------------+---------------------------------------------------------
+    salesrep |      2,446    .1496321    .3567833          0          1
+ retailsales |      2,446    .1627146    .3691806          0          1
+         req |      2,446    .7882257    .4086493          0          1
+      expreq |      2,446     .439493    .4964269          0          1
+      comreq |      2,446    .1234669    .3290396          0          1
+-------------+---------------------------------------------------------
+     educreq |      2,446     .108749    .3113877          0          1
+     compreq |      2,446    .4411284    .4966236          0          1
+      orgreq |      2,446    .0744072    .2624861          0          1
+       manuf |      2,446    .0809485    .2728118          0          1
+    transcom |      2,446    .0294358    .1690593          0          1
+-------------+---------------------------------------------------------
+    bankreal |      2,446    .0850368    .2789935          0          1
+       trade |      2,446    .2158626    .4115036          0          1
+  busservice |      2,446    .2665576    .4422495          0          1
+  othservice |      2,446     .156991    .3638667          0          1
+     missind |      2,446    .1651676    .3714077          0          1
+-------------+---------------------------------------------------------
+       black |      2,446          .5    .5001022          0          1
+     chicago |      2,446    .5576451    .4967675          0          1
+        high |      2,446           1           0          1          1
+      female |      2,446     .768193    .4220727          0          1
+     college |      2,446    .7240392    .4470885          0          1
+-------------+---------------------------------------------------------
+   call_back |      2,446    .0874898    .2826092          0          1
+
+Following variable is string, not included:  
+firstname  expminreq  
+Hit Enter to continue. 
+./Analysis/table2.xls
+dir : seeout
+
+. 
+. * Mean & standard deviation for the resume characteristics to resume with Lower quality
+. summarize college yearsexp volunteer military email empholes workinschool honors computerskills specialskills if high == 0 
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+     college |      2,424     .714934     .451539          0          1
+    yearsexp |      2,424    7.387376    4.746189          1         26
+   volunteer |      2,424    .0272277    .1627799          0          1
+    military |      2,424    .0033003    .0573655          0          1
+       email |      2,424    .0305281    .1720706          0          1
+-------------+---------------------------------------------------------
+    empholes |      2,424    .5573432    .4968034          0          1
+workinschool |      2,424    .3993399    .4898638          0          1
+      honors |      2,424    .0342409    .1818849          0          1
+computersk~s |      2,424    .7306106    .4437342          0          1
+specialski~s |      2,424     .299505    .4581357          0          1
+
+. outreg2 if high ==0 using  "./Analysis/table2.xls", sum(log) eqdrop(N max min) append see
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+      ofjobs |      2,424    3.353548     1.06844          1          6
+    yearsexp |      2,424    7.387376    4.746189          1         26
+      honors |      2,424    .0342409    .1818849          0          1
+   volunteer |      2,424    .0272277    .1627799          0          1
+    military |      2,424    .0033003    .0573655          0          1
+-------------+---------------------------------------------------------
+    empholes |      2,424    .5573432    .4968034          0          1
+workinschool |      2,424    .3993399    .4898638          0          1
+       email |      2,424    .0305281    .1720706          0          1
+computersk~s |      2,424    .7306106    .4437342          0          1
+specialski~s |      2,424     .299505    .4581357          0          1
+-------------+---------------------------------------------------------
+         eoe |      2,424    .2854785    .4517352          0          1
+     manager |      2,424    .1505776    .3577104          0          1
+  supervisor |      2,424    .0709571    .2568061          0          1
+   secretary |      2,424    .3337459    .4716475          0          1
+  offsupport |      2,424    .1188119    .3236338          0          1
+-------------+---------------------------------------------------------
+    salesrep |      2,424    .1526403    .3597146          0          1
+ retailsales |      2,424    .1732673    .3785563          0          1
+         req |      2,424    .7863036    .4099995          0          1
+      expreq |      2,424    .4311056     .495333          0          1
+      comreq |      2,424    .1262376    .3321855          0          1
+-------------+---------------------------------------------------------
+     educreq |      2,424    .1047855      .30634          0          1
+     compreq |      2,424    .4331683    .4956156          0          1
+      orgreq |      2,424    .0709571    .2568061          0          1
+       manuf |      2,424    .0849835    .2789147          0          1
+    transcom |      2,424    .0313531    .1743062          0          1
+-------------+---------------------------------------------------------
+    bankreal |      2,424    .0849835    .2789147          0          1
+       trade |      2,424    .2120462    .4088417          0          1
+  busservice |      2,424    .2689769    .4435194          0          1
+  othservice |      2,424    .1526403    .3597146          0          1
+     missind |      2,424    .1650165     .371272          0          1
+-------------+---------------------------------------------------------
+       black |      2,424          .5    .5001032          0          1
+     chicago |      2,424    .5528053    .4973064          0          1
+        high |      2,424           0           0          0          0
+      female |      2,424    .7702145    .4207816          0          1
+     college |      2,424     .714934     .451539          0          1
+-------------+---------------------------------------------------------
+   call_back |      2,424    .0734323    .2608987          0          1
+
+Following variable is string, not included:  
+firstname  expminreq  
+Hit Enter to continue. 
+./Analysis/table2.xls
+dir : seeout
+
+. 
+. 
+. ** FIGURE 1: BAR CHART - Callback rates by Race and Resume Quality
+. label define racelabel 0 "White" 1 "Black"
+
+. label values black racelabel
+
+. graph bar call_back, over(black) by(high)
+
+. 
+. *** TABLE 3: RETURN TO CREDENTIALS BY RACE
+. 
+. * Generate yearsexp(*10)
+. gen new_years_var = yearsexp / 10
+
+. gen new_years_var2 = yearsexp / 100
+
+. 
+. *  Probit regression of callback dummy for all resume
+. 
+. reg call_back  c.new_years_var##c.new_years_var volunteer military email empholes workinschool honors computerskills specialskills, robus
+> t
+
+Linear regression                               Number of obs     =      4,870
+                                                F(10, 4859)       =       8.59
+                                                Prob > F          =     0.0000
+                                                R-squared         =     0.0235
+                                                Root MSE          =     .26914
+
+-------------------------------------------------------------------------------------------------
+                                |               Robust
+                      call_back | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+--------------------------------+----------------------------------------------------------------
+                  new_years_var |   .0818499    .026885     3.04   0.002     .0291431    .1345566
+                                |
+c.new_years_var#c.new_years_var |  -.0208512   .0102264    -2.04   0.042    -.0408996   -.0008028
+                                |
+                      volunteer |   .0002336     .01138     0.02   0.984    -.0220763    .0225435
+                       military |   .0095895   .0147753     0.65   0.516    -.0193767    .0385557
+                          email |   .0098733   .0113461     0.87   0.384    -.0123702    .0321169
+                       empholes |   .0278152   .0099573     2.79   0.005     .0082943    .0473361
+                   workinschool |     .01502    .010547     1.42   0.154     -.005657    .0356969
+                         honors |   .0583143   .0241707     2.41   0.016     .0109288    .1056997
+                 computerskills |    -.02679   .0115849    -2.31   0.021    -.0495017   -.0040782
+                  specialskills |   .0608658   .0094228     6.46   0.000     .0423928    .0793388
+                          _cons |   .0066985   .0174314     0.38   0.701    -.0274749    .0408719
+-------------------------------------------------------------------------------------------------
+
+. outreg2 using "./Analysis/table3.xls", replace
+./Analysis/table3.xls
+dir : seeout
+
+. 
+. * Probit regression of callback dummy for White names
+. 
+. reg call_back  c.new_years_var##c.new_years_var volunteer military email empholes workinschool honors computerskills specialskills if bla
+> ck == 0, robust
+
+Linear regression                               Number of obs     =      2,435
+                                                F(10, 2424)       =       6.40
+                                                Prob > F          =     0.0000
+                                                R-squared         =     0.0330
+                                                Root MSE          =     .29103
+
+-------------------------------------------------------------------------------------------------
+                                |               Robust
+                      call_back | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+--------------------------------+----------------------------------------------------------------
+                  new_years_var |   .1540125   .0443671     3.47   0.001     .0670112    .2410138
+                                |
+c.new_years_var#c.new_years_var |  -.0481275   .0170523    -2.82   0.005    -.0815661   -.0146889
+                                |
+                      volunteer |  -.0107284   .0177852    -0.60   0.546    -.0456043    .0241475
+                       military |   .0390482    .025077     1.56   0.120    -.0101264    .0882228
+                          email |   .0214771   .0178733     1.20   0.230    -.0135715    .0565256
+                       empholes |   .0384219   .0153752     2.50   0.013      .008272    .0685718
+                   workinschool |   .0227325   .0159462     1.43   0.154    -.0085372    .0540021
+                         honors |   .0672644   .0369666     1.82   0.069     -.005225    .1397538
+                 computerskills |  -.0428983    .016884    -2.54   0.011    -.0760069   -.0097897
+                  specialskills |   .0753938   .0148493     5.08   0.000     .0462752    .1045123
+                          _cons |  -.0157124   .0269933    -0.58   0.561    -.0686448    .0372199
+-------------------------------------------------------------------------------------------------
+
+. outreg2 using "./Analysis/table3.xls", append
+./Analysis/table3.xls
+dir : seeout
+
+. 
+. *  Probit regression of callback dummy for African-American names
+. 
+. reg call_back  c.new_years_var##c.new_years_var volunteer military email empholes workinschool honors computerskills specialskills if bla
+> ck == 1, robust
+
+Linear regression                               Number of obs     =      2,435
+                                                F(10, 2424)       =       2.86
+                                                Prob > F          =     0.0015
+                                                R-squared         =     0.0174
+                                                Root MSE          =     .24401
+
+-------------------------------------------------------------------------------------------------
+                                |               Robust
+                      call_back | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+--------------------------------+----------------------------------------------------------------
+                  new_years_var |   .0270719   .0335735     0.81   0.420    -.0387638    .0929075
+                                |
+c.new_years_var#c.new_years_var |   -.000713   .0129694    -0.05   0.956    -.0261453    .0247192
+                                |
+                      volunteer |   .0133464   .0139733     0.96   0.340    -.0140543    .0407472
+                       military |  -.0119233    .016191    -0.74   0.462     -.043673    .0198264
+                          email |  -.0044833   .0139763    -0.32   0.748    -.0318899    .0229233
+                       empholes |   .0175828    .012422     1.42   0.157    -.0067761    .0419418
+                   workinschool |   .0044552   .0138041     0.32   0.747     -.022614    .0315243
+                         honors |    .045881   .0301589     1.52   0.128    -.0132589    .1050209
+                 computerskills |  -.0072354   .0154501    -0.47   0.640    -.0375321    .0230613
+                  specialskills |   .0470765   .0115074     4.09   0.000     .0245111    .0696418
+                          _cons |   .0196488   .0219265     0.90   0.370    -.0233477    .0626454
+-------------------------------------------------------------------------------------------------
+
+. outreg2 using "./Analysis/table3.xls", append
+./Analysis/table3.xls
+dir : seeout
+
+. 
+. * Linear probability model (Binary: callback)
+. 
+. reg call_back i.specialskills##i.black, robust
+
+Linear regression                               Number of obs     =      4,870
+                                                F(3, 4866)        =      21.48
+                                                Prob > F          =     0.0000
+                                                R-squared         =     0.0162
+                                                Root MSE          =     .26995
+
+-------------------------------------------------------------------------------------
+                    |               Robust
+          call_back | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+--------------------+----------------------------------------------------------------
+    1.specialskills |   .0768879   .0140539     5.47   0.000      .049336    .1044399
+                    |
+              black |
+             Black  |   -.023503   .0082612    -2.84   0.004    -.0396987   -.0073072
+                    |
+specialskills#black |
+           1#Black  |  -.0253853   .0183672    -1.38   0.167    -.0613933    .0106228
+                    |
+              _cons |    .071122    .006367    11.17   0.000     .0586399    .0836041
+-------------------------------------------------------------------------------------
+
+. margins, dydx(specialskills) over(black)
+
+Average marginal effects                                 Number of obs = 4,870
+Model VCE: Robust
+
+Expression: Linear prediction, predict()
+dy/dx wrt:  1.specialskills
+Over:       black
+
+----------------------------------------------------------------------------------
+                 |            Delta-method
+                 |      dy/dx   std. err.      t    P>|t|     [95% conf. interval]
+-----------------+----------------------------------------------------------------
+0.specialskills  |  (base outcome)
+-----------------+----------------------------------------------------------------
+1.specialskills  |
+           black |
+          White  |   .0768879   .0140539     5.47   0.000      .049336    .1044399
+          Black  |   .0515027   .0118255     4.36   0.000     .0283193     .074686
+----------------------------------------------------------------------------------
+Note: dy/dx for factor levels is the discrete change from the base level.
+
+. 
+. log close
+      name:  <unnamed>
+       log:  C:\Users\PhotonUser\My Files\OneDrive\Files\Vo-Hoang-Nguyen-298-Replication\Analysis/Analysis.log
+  log type:  text
+ closed on:  10 Dec 2025, 20:19:31
+-------------------------------------------------------------------------------------------------------------------------------------------
