@@ -6,15 +6,16 @@ Group project repository for the replication exercise by Vo / Hoang / Nguyen.
 This repository contains the Stata code, data, and outputs needed to reproduce the results reported in the group's replication write-up.
 
 ## Repository contents (high level)
-- `Analysis/`  
-  - `Analysis.do` — main Stata do-file that runs the full analysis  
-  - `Analysis.log` — example Stata log produced when the do-file was run  
-  - `Figure1.gph` — main figure produced by the analysis  
-  - `table1.xls`, `table2.xls`, `table3.xls` and modified versions — regression output tables  
-- `Data/`  
-  - `Names.dta` — primary dataset used for all results (no additional preprocessing required)  
-- `finalpaper.docx`, finalpaper.pdf — project write-up  
-- `readme.pdf` — original project readme (PDF)
+-`Vo-Hoang-Nguyen-298-Replication/`
+  - `Analysis/`  
+    - `Analysis.do` — main Stata do-file that runs the full analysis  
+    - `Analysis.log` — example Stata log produced when the do-file was run  
+    - `Figure1.gph` — main figure produced by the analysis  
+    - `table1.xls`, `table2.xls`, `table3.xls` and modified versions — regression output tables  
+  - `Data/`  
+    - `Names.dta` — primary dataset used for all results (no additional preprocessing required)  
+  - `finalpaper.docx`, finalpaper.pdf — project write-up  
+  - `readme.pdf` — original project readme (PDF)
 
 ## Requirements
 - Stata 16 or later is recommended. The do-file was developed/tested with Stata 16.  
