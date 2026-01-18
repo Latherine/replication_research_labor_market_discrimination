@@ -13,7 +13,10 @@ This repository contains the Stata code, data, and outputs needed to reproduce t
     - `Figure1.gph` — main figure produced by the analysis  
     - `table1.xls`, `table2.xls`, `table3.xls` and modified versions — regression output tables  
   - `Data/`  
-    - `Names.dta` — primary dataset used for all results (no additional preprocessing required)  
+    - `Names.dta` — primary dataset used for all results (no additional preprocessing required)
+    - `Names.xls` - dataset in Excel
+    - `Names_Description.pdf` - description of the dataset
+    - `Betrand&MullainathanAER2004.pdf`- original study paper by Marianne Betrand and Sendhil Mullainathan
   - `finalpaper.docx`, finalpaper.pdf — project write-up  
   - `readme.pdf` — original project readme (PDF)
 
