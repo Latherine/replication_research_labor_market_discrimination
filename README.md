@@ -6,7 +6,7 @@ Group project repository for the replication exercise by Vo / Hoang / Nguyen.
 This repository contains the Stata code, data, and outputs needed to reproduce the results reported in the group's replication write-up.
 
 ## Repository contents (high level)
--`Vo-Hoang-Nguyen-298-Replication/`
+- `Vo-Hoang-Nguyen-298-Replication/`
   - `Analysis/`  
     - `Analysis.do` — main Stata do-file that runs the full analysis  
     - `Analysis.log` — example Stata log produced when the do-file was run  
